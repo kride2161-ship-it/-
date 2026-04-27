@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>АРТС&КРАФТИНГ | Контакты и Ремонт</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #dcfce7 100%);
+      --apple-green: #30d158;
+      --deep-green: #064e3b;
+      --glass-white: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.9);
+      --text-main: #1c1c1e;
+      --text-muted: #6b7280;
+      --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.04);
+      --ios-radius: 32px;
+      --ios-inner-radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro', sans-serif;
+      background-color: #f9fafb;
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Анимированный фон "Aurora" */
+    .bg-aurora {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      background: var(--bg-gradient);
+      background-size: 300% 300%;
+      animation: auroraFlow 20s ease infinite;
+    }
+
+    @keyframes auroraFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Dynamic Island */
+    .dynamic-island-container {
+      position: sticky;
+      top: 15px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dynamic-island {
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .island-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-online {
+      background: var(--apple-green);
+      box-shadow: 0 0 10px var(--apple-green);
+      animation: pulse 2s infinite;
+    }
+
+    .dot-offline { background: #8e8e93; }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .container {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 1rem 1.2rem 8rem;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      background: linear-gradient(to bottom, var(--deep-green), var(--apple-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .hero p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Секции */
+    section {
+      margin-top: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.7s cubic-bezier(0.2, 1, 0.2, 1);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      color: var(--deep-green);
+      letter-spacing: -0.02em;
+    }
+
+    /* Контакты в стиле iOS */
+    .contacts-card {
+      background: var(--glass-white);
+      backdrop-filter: blur(40px) saturate(210%);
+      -webkit-backdrop-filter: blur(40px) saturate(210%);
+      border-radius: var(--ios-radius);
+      border: 1px solid var(--glass-border);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-item {
+      background: white;
+      border-radius: 22px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.2s;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .contact-item:active { transform: scale(0.98); background: #f2f2f7; }
+
+    .contact-info { display: flex; align-items: center; gap: 14px; }
+    
+    .contact-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+    }
+
+    .bg-phone { background: var(--apple-green); }
+    .bg-tg { background: #0088cc; }
+    .bg-max { background: #5856d6; }
+
+    .contact-label h4 { font-size: 1rem; font-weight: 700; }
+    .contact-label p { font-size: 0.8rem; color: var(--text-muted); }
+
+    .reveal-btn {
+      background: #f2f2f7;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      color: var(--deep-green);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Прайс-лист */
+    .price-group {
+      background: var(--glass-white);
+      backdrop-filter: blur(40px) saturate(210%);
+      -webkit-backdrop-filter: blur(40px) saturate(210%);
+      border-radius: var(--ios-radius);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .price-row:last-child { border-bottom: none; }
+    
+    .price-tag {
+      background: var(--apple-green);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* Галерея */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0 100px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Sticky Bottom Nav */
+    .cta-fixed {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
+      max-width: 500px;
+      z-index: 999;
+    }
+
+    .btn-main {
+      width: 100%;
+      background: var(--apple-green);
+      color: white;
+      padding: 20px;
+      border-radius: 22px;
+      border: none;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 15px 35px rgba(48, 209, 88, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-aurora"></div>
+
+  <!-- Dynamic Island -->
+  <div class="dynamic-island-container">
+    <div class="dynamic-island" id="island">
+      <div id="island-dot" class="island-dot"></div>
+      <span id="island-text">Определяем статус...</span>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <header class="hero">
+      <h1>АРТС&КРАФТИНГ</h1>
+      <p>Профессиональный ремонт и забота</p>
+    </header>
+
+    <!-- Секция Контакты -->
+    <section class="visible">
+      <h2 class="section-title">Связаться с нами</h2>
+      <div class="contacts-card">
+        
+        <div class="contact-item">
+          <div class="contact-info">
+            <div class="contact-icon bg-phone">📞</div>
+            <div class="contact-label">
+              <h4>Телефон</h4>
+              <p id="phone-display">Нажмите, чтобы увидеть</p>
+            </div>
+          </div>
+          <button class="reveal-btn" id="phone-btn" onclick="revealPhone()">Показать</button>
+        </div>
+
+        <a href="https://t.me/ARTSANDCRAFTING" target="_blank" class="contact-item">
+          <div class="contact-info">
+            <div class="contact-icon bg-tg">✈️</div>
+            <div class="contact-label">
+              <h4>Telegram</h4>
+              <p>Наш канал с новостями</p>
+            </div>
+          </div>
+          <div class="reveal-btn">Открыть</div>
+        </a>
+
+        <a href="https://max.ru/join/6vA9eQ-0nmP55CTnB5MfnYQ4zmW253WY_fukBZuK5lU" target="_blank" class="contact-item">
+          <div class="contact-info">
+            <div class="contact-icon bg-max">💎</div>
+            <div class="contact-label">
+              <h4>MAX Канал</h4>
+              <p>Эксклюзивные новости</p>
+            </div>
+          </div>
+          <div class="reveal-btn">Вступить</div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Услуги -->
+    <section>
+      <h2 class="section-title">Наши услуги</h2>
+      <div class="price-group">
+        <div class="price-row">
+          <div>
+            <h4>Замена бегунка</h4>
+            <p>Вернем жизнь молнии за 10 минут</p>
+          </div>
+          <div class="price-tag">от 150₽</div>
+        </div>
+        <div class="price-row">
+          <div>
+            <h4>Ремонт кожи/меха</h4>
+            <p>Деликатная работа с материалом</p>
+          </div>
+          <div class="price-tag">от 500₽</div>
+        </div>
+        <div class="price-row">
+          <div>
+            <h4>Подшив брюк</h4>
+            <p>Любая сложность и фасон</p>
+          </div>
+          <div class="price-tag">от 400₽</div>
+        </div>
+        <div class="price-row">
+          <div>
+            <h4>Замена молнии</h4>
+            <p>Качественные японские молнии</p>
+          </div>
+          <div class="price-tag">от 450₽</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Галерея -->
+    <section>
+      <h2 class="section-title">Работы мастера</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://i.postimg.cc/0zRYN9T3/image.jpg" alt="1"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/jw5N12fd/image.jpg" alt="2"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/300GKqn3/image.jpg" alt="3"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/Rq2fPMZn/image.jpg" alt="4"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/Lq4Zq5NW/image.jpg" alt="5"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/VrdrRTyD/image.jpg" alt="6"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/6T444DLS/image.jpg" alt="7"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/zy8yM3Z5/image.jpg" alt="8"></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/tZKTz4t8/image.jpg" alt="9"></div>
+      </div>
+    </section>
+
+    <footer>
+      АРТС&КРАФТИНГ 2026 — PREMIUM REPAIR
+    </footer>
+  </div>
+
+  <!-- Кнопка позвонить (всегда под рукой) -->
+  <div class="cta-fixed">
+    <button class="btn-main" onclick="revealPhone(true)">
+      <span>📞 Позвонить в мастерскую</span>
+    </button>
+  </div>
+
+  <script>
+    // Раскрытие телефона
+    function revealPhone(shouldCall = false) {
+      const phone = "8-902-724-60-61";
+      document.getElementById('phone-display').innerText = phone;
+      document.getElementById('phone-display').style.color = "var(--apple-green)";
+      document.getElementById('phone-display').style.fontWeight = "bold";
+      document.getElementById('phone-btn').innerText = "Позвонить";
+      document.getElementById('phone-btn').onclick = () => window.location.href = `tel:${phone}`;
+      
+      if(shouldCall) window.location.href = `tel:${phone}`;
+    }
+
+    // Логика времени
+    function updateStatus() {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const msk = new Date(utc + (3600000 * 3));
+      
+      const day = msk.getDay();
+      const hours = msk.getHours();
+      const minutes = msk.getMinutes();
+      const time = hours + (minutes/60);
+
+      let isOpen = false;
+      if (day >= 1 && day <= 5) { // Пн-Пт
+        if (time >= 9 && time < 18) isOpen = true;
+      } else if (day === 6) { // Сб
+        if (time >= 10 && time < 17) isOpen = true;
+      }
+
+      const dot = document.getElementById('island-dot');
+      const text = document.getElementById('island-text');
+      
+      if (isOpen) {
+        dot.className = "island-dot dot-online";
+        text.innerText = "Мастерская онлайн";
+      } else {
+        dot.className = "island-dot dot-offline";
+        text.innerText = "Мастерская отдыхает";
+      }
+    }
+
+    // Анимации при скролле
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(el => observer.observe(el));
+    
+    updateStatus();
+    setInterval(updateStatus, 30000);
+  </script>
+</body>
+</html>
